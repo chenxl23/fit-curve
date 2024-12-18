@@ -6,7 +6,7 @@ from scipy.optimize import curve_fit
 
 # 读取Excel文件中的数据
 # 假设Excel文件名为data.xlsx，第一列是x轴数据，第二列是y轴数据
-file_path = r'C:\Users\za\Desktop\数据.xlsx'
+file_path = r'C:\Users\za\Desktop\空间分辨率数据整理\20-200.xlsx'
 df = pd.read_excel(file_path)
 
 # 提取x轴和y轴数据
