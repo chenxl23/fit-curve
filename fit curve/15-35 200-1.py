@@ -12,17 +12,17 @@ def bessel_model(x, a, b, c):
 
 # 文件路径列表
 file_paths = [
-    r'C:\Users\za\Desktop\空间分辨率数据整理\10-200.xlsx',
-    r'C:\Users\za\Desktop\空间分辨率数据整理\20-200.xlsx',
-    r'C:\Users\za\Desktop\空间分辨率数据整理\30-200.xlsx'
+    r'E:\清华云盘\陈显力_1\我的资料库\调研\碳纳米管薄膜气体温度场\实验数据\20241227\修正\1cm\数据提取\xlsx文件\15V-1cm-200sccm 0.xlsx',
+    r'E:\清华云盘\陈显力_1\我的资料库\调研\碳纳米管薄膜气体温度场\实验数据\20241227\修正\1cm\数据提取\xlsx文件\25V-1cm-200sccm 0.xlsx',
+    r'E:\清华云盘\陈显力_1\我的资料库\调研\碳纳米管薄膜气体温度场\实验数据\20241227\修正\1cm\数据提取\xlsx文件\35V-1cm-200sccm 0.xlsx'
 ]
 
 # 设置图表
 plt.figure(figsize=(20, 15))
 
 # 固定区间，例如选择 x 范围 [0.5, 2.0]
-x_min = 0.2
-x_max = 0.4
+x_min = 2
+x_max = 4
 
 # 遍历所有文件
 for file_path in file_paths:
@@ -30,8 +30,8 @@ for file_path in file_paths:
     df = pd.read_excel(file_path)
 
     # 提取x轴和y轴数据
-    x_data = df.iloc[0:76, 0]  # 第一列为x轴
-    y_data = df.iloc[0:76, 1]  # 第二列为y轴
+    x_data = df.iloc[:, 0]  # 第一列为x轴
+    y_data = df.iloc[:, 1]  # 第二列为y轴
 
     # 获取文件名，使用os.path.basename来处理路径
     file_name = os.path.basename(file_path)
@@ -48,7 +48,7 @@ for file_path in file_paths:
     print(f'For file {file_name}, the slope in the range x = [{x_min}, {x_max}] is: {slope:.4f}(K/cm)')
 
     # 使用curve_fit进行贝塞尔函数拟合
-    params, covariance = curve_fit(bessel_model, x_data, y_data, p0=[1, 1, 1])  # p0为初始参数猜测的初始值
+    params, covariance = curve_fit(bessel_model, x_data, y_data, p0=[1, 1, 1],maxfev=10000)  # p0为初始参数猜测的初始值
 
     # 提取拟合参数
     a_fit, b_fit, c_fit = params
@@ -91,8 +91,8 @@ plt.ylabel('Temperature (°C)', fontsize=16)  # 设置 y 轴标签字体大小�
 plt.legend(fontsize=14)  # 设置图例的字体大小为 14
 
 # 设置横坐标和纵坐标范围
-plt.xlim(0, 1.5)
-plt.ylim(25, 39)
+plt.xlim(0, 14.5)
+plt.ylim(30, 250)
 
 # 显示图表
 plt.show()
