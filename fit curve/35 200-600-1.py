@@ -16,9 +16,9 @@ def bessel_model(x, a, b, c):
 
 # 文件路径列表
 file_paths = [
-    r'E:\清华云盘\陈显力_1\我的资料库\调研\碳纳米管薄膜气体温度场\实验数据\20241227\修正\1cm\数据提取\xlsx文件\更改名字\35V-200sccm.xlsx',
-    r'E:\清华云盘\陈显力_1\我的资料库\调研\碳纳米管薄膜气体温度场\实验数据\20241227\修正\1cm\数据提取\xlsx文件\更改名字\35V-400sccm.xlsx',
-    r'E:\清华云盘\陈显力_1\我的资料库\调研\碳纳米管薄膜气体温度场\实验数据\20241227\修正\1cm\数据提取\xlsx文件\更改名字\35V-600sccm.xlsx'
+    r'E:\清华云盘\陈显力_1\我的资料库\调研\碳纳米管薄膜气体温度场\实验数据\20241227\修正\1cm\数据提取\xlsx文件\更改名字\35V\200sccm.xlsx',
+    r'E:\清华云盘\陈显力_1\我的资料库\调研\碳纳米管薄膜气体温度场\实验数据\20241227\修正\1cm\数据提取\xlsx文件\更改名字\35V\400sccm.xlsx',
+    r'E:\清华云盘\陈显力_1\我的资料库\调研\碳纳米管薄膜气体温度场\实验数据\20241227\修正\1cm\数据提取\xlsx文件\更改名字\35V\600sccm.xlsx'
 ]
 
 # 设置图表
@@ -80,13 +80,14 @@ for file_path in file_paths:
     file_name_no_ext = file_name.rsplit('.', 1)[0]
 
     # 绘制散点图
-    plt.scatter(x_data, y_data, label=f'{file_name_no_ext} - Data Points') # 使用文件名来区分不同数据集
+    plt.scatter(x_data, y_data, label=f'{file_name_no_ext} - Data') # 使用文件名来区分不同数据集
 
     # 绘制拟合曲线
-    plt.plot(x_fit, y_fit_curve, label=f'{file_name_no_ext} - Fitted Curve')
+    plt.plot(x_fit, y_fit_curve, label=f'{file_name_no_ext} - Fitted')
 
 # 设置刻度字体大小
-plt.tick_params(axis='both', which='major', labelsize=18)
+plt.tick_params(axis='both', which='major', labelsize=20)  # 设置主刻度字体大小
+plt.tick_params(axis='both', which='minor', labelsize=18)  # 设置次刻度字体大小
 
 # 设置主刻度和次刻度
 ax = plt.gca()  # 获取当前坐标轴
@@ -103,21 +104,21 @@ plt.axvspan(x_min, x_max, color='yellow', alpha=0.3, label=f'Linear Fit Range') 
 # 在 x_min + x_max 的中点基础上加 0.2，往右移动
 x_text_pos = (x_min + x_max) / 2 + 1
 
-plt.text(x_text_pos,
-         max(y_data),
-         f'Linear Fit Range: x = [{x_min}, {x_max}]',
-         horizontalalignment='center',
-         fontsize=14,
-         color='black',
-         weight='bold')
+# plt.text(x_text_pos,
+#          max(y_data),
+#          f'Linear Fit Range: x = [{x_min}, {x_max}]',
+#          horizontalalignment='center',
+#          fontsize=14,
+#          color='black',
+#          weight='bold')
 
 # plt.text((x_min + x_max) / 2, max(y_data), f'Linear Fit Range: x = [{x_min}, {x_max}]',
 #              horizontalalignment='center', fontsize=14, color='black', weight='bold')
 
 # 添加标签和图例，并调整标签字体大小
-plt.xlabel('Location (mm)', fontsize=20)  # 设置 x 轴标签字体大小为 16
-plt.ylabel('Temperature (°C)', fontsize=20)  # 设置 y 轴标签字体大小为 16
-plt.legend(fontsize=16)  # 设置图例的字体大小为 14
+plt.xlabel('Location (mm)', fontsize=22)  # 设置 x 轴标签字体大小为 16
+plt.ylabel('Temperature (°C)', fontsize=22)  # 设置 y 轴标签字体大小为 16
+plt.legend(fontsize=18)  # 设置图例的字体大小为 14
 
 # 设置横坐标和纵坐标范围
 plt.xlim(0, 14.5)
