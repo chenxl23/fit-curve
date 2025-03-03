@@ -83,21 +83,21 @@ for i, file_path in enumerate(file_paths):
     color = colors[i % len(colors)]
 
     # 绘制数据点
-    plt.scatter(x_data, y_data, color=color, alpha=0.6)
+    plt.scatter(x_data, y_data, color=color, alpha=0.6,s=60)
 
     # 绘制拟合曲线
-    plt.plot(x_fit, y_fit_curve, color=color)
+    plt.plot(x_fit, y_fit_curve, color=color, linewidth=2.5)
 
     # **创建分开的 marker 和 line**
     marker_legend = Line2D([0], [0], marker='o', linestyle='None', color=color, markersize=8)
-    line_legend = Line2D([0], [0], linestyle='-', color=color)
+    line_legend = Line2D([0], [0], linestyle='-', color=color, linewidth=2)
 
     # 合并 marker 和 line 成同一图例项
     custom_legend.append((marker_legend, line_legend))
     labels.append(f'{file_name_no_ext} - Data & Fitted')
 
 # 设置刻度字体大小
-plt.tick_params(axis='both', which='major', labelsize=18)
+plt.tick_params(axis='both', which='major', labelsize=22)
 
 # 设置主刻度和次刻度
 ax = plt.gca()
@@ -107,18 +107,18 @@ ax.yaxis.set_major_locator(MultipleLocator(100))
 ax.yaxis.set_minor_locator(AutoMinorLocator(5))
 
 # 设置刻度字体大小
-plt.tick_params(axis='both', which='major', labelsize=20)
-plt.tick_params(axis='both', which='minor', labelsize=18)
+plt.tick_params(axis='both', which='major', labelsize=24)
+plt.tick_params(axis='both', which='minor', labelsize=22)
 
 # 绘制局部线性拟合区间
 plt.axvspan(x_min, x_max, color='yellow', alpha=0.3, label='Linear Fit Range')
 
 # 添加轴标签
-plt.xlabel('Location (mm)', fontsize=22)
-plt.ylabel('Temperature (°C)', fontsize=22)
+plt.xlabel('Location (mm)', fontsize=26)
+plt.ylabel('Temperature (°C)', fontsize=26)
 
 # **合并 marker 和 linestyle 在一个图例项**
-plt.legend(custom_legend, labels, fontsize=18, loc='upper right', ncol=1, handler_map={tuple: HandlerTuple(ndivide=None)})
+plt.legend(custom_legend, labels, fontsize=22, loc='upper right', ncol=1, handler_map={tuple: HandlerTuple(ndivide=None)})
 
 # 设置坐标范围
 plt.xlim(0, 14.5)
